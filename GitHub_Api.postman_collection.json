@@ -1,0 +1,299 @@
+{
+	"info": {
+		"_postman_id": "909d35e8-dc9c-4021-8247-1f0154e0f7f0",
+		"name": "GitHub_Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25879026"
+	},
+	"item": [
+		{
+			"name": "Issues",
+			"item": [
+				{
+					"name": "Get",
+					"item": [
+						{
+							"name": "Getl_Issue_by_Number",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test (\"status code\",function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://api.github.com/repos/testnakov/test-nakov-repo/issues/12",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"testnakov",
+										"test-nakov-repo",
+										"issues",
+										"12"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get_Issue_By_Repo",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://api.github.com/repos/testnakov/test-nakov-repo/issues",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"testnakov",
+										"test-nakov-repo",
+										"issues"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "Create_Issue",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "Elsaxos",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "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",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"First issue\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.github.com/repos/testnakov/test-nakov-repo/issues",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"testnakov",
+										"test-nakov-repo",
+										"issues"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Post_New_Issue",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"pm.test(\"Check Isuue number\", function () {\r",
+											"    let body = pm.response.json();\r",
+											"    pm.expect(body.number,\"Number property\").greaterThan(0);\r",
+											"    pm.expect(body.title, \"Title property\").equal(\"Found a bug\", \"I'm having a problem with this\");\r",
+											"})\r",
+											" "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "Elsaxos",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "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",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"title\":\"Found a bug\",\r\n \"body\": \"I'm having a problem with this.\"}"
+								},
+								"url": {
+									"raw": "https://api.github.com/repos/testnakov/test-nakov-repo/issues",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"testnakov",
+										"test-nakov-repo",
+										"issues"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "repos",
+			"item": [
+				{
+					"name": "Get",
+					"item": []
+				},
+				{
+					"name": "Get_All_Repos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/users/testnakov/repos",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"users",
+								"testnakov",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Single_Repo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"Repository exists\", function() {\r",
+									"    var jsondata = pm.response.json();\r",
+									"    pm.expect(jsondata.name).to.eql(\"test-nakov-repo\");\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Check repo name\", function () {\r",
+									"    const body = pm.response.json();\r",
+									"     pm.expect(body.name,\"Name property\").equals(\"test-nakov-repo\");\r",
+									"} )\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/repos/testnakov/test-nakov-repo",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"repos",
+								"testnakov",
+								"test-nakov-repo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
